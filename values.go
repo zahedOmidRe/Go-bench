@@ -110,10 +110,6 @@ func (p Product) VentureID() uuid.UUID {
 	return p.DBVentureID
 }
 
-func (p *Product) SetId(id int) {
-	p.DBId = id
-}
-
 type ProductPointer struct {
 	DBId                 int          `db:"id"`
 	DBPrice              int          `db:"price"`
@@ -208,10 +204,6 @@ func (p *ProductPointer) Limitation() int {
 	return p.DBLimitation
 }
 
-func (p *ProductPointer) SetId(id int) {
-	p.DBId = id
-}
-
 func (p *ProductPointer) VentureID() uuid.UUID {
 	return p.DBVentureID
 }
@@ -258,7 +250,6 @@ type ProductInterface interface {
 	PID() uuid.UUID
 	Limitation() int
 	VentureID() uuid.UUID
-	SetId(int)
 }
 
 func makeProductInterfaceOnPointer() ProductInterface {
@@ -266,7 +257,7 @@ func makeProductInterfaceOnPointer() ProductInterface {
 }
 
 func makeProductInterfaceOnStruct() ProductInterface {
-	return &Product{}
+	return Product{}
 }
 
 func CastToMedium(p ProductInterface) ProducMedium {
